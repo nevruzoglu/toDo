@@ -4,6 +4,11 @@ class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: null,
+        backgroundColor: Colors.blueAccent,
+        child: Icon(Icons.add),
+      ),
       backgroundColor: Colors.blueAccent,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,15 +49,44 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(30),
                       topLeft: Radius.circular(30))),
+              child: TileView(),
             ),
           )
         ],
       ),
+    );
+  }
+}
+
+class TileView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: <Widget>[
+        TileList(task: 'Buy milk', check: true),
+        TileList(task: 'Buy bread', check: false),
+        TileList(task: 'Drink milk', check: true)
+      ],
+    );
+  }
+}
+
+class TileList extends StatelessWidget {
+  TileList({@required this.task, @required this.check});
+  final String task;
+  final bool check;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(' $task'),
+      trailing: Checkbox(value: check, onChanged: null),
     );
   }
 }
