@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'modal_screen.dart';
+
 class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueAccent,
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
         backgroundColor: Colors.blueAccent,
         child: Icon(Icons.add),
+        onPressed: () {
+          showModalBottomSheet(
+              context: context, builder: (contex) => ShowModalScreen());
+        },
       ),
-      backgroundColor: Colors.blueAccent,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
