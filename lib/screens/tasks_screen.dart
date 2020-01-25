@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:todo/widgets/task_list.dart';
 import 'modal_screen.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -12,7 +12,13 @@ class TasksScreen extends StatelessWidget {
         child: Icon(Icons.add),
         onPressed: () {
           showModalBottomSheet(
-              context: context, builder: (contex) => ShowModalScreen());
+              context: context,
+              isScrollControlled: true,
+              builder: (contex) => SingleChildScrollView(
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: ShowModalScreen())));
         },
       ),
       body: Column(
@@ -60,38 +66,11 @@ class TasksScreen extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(30),
                       topLeft: Radius.circular(30))),
-              child: TileView(),
+              child: TaskList(),
             ),
           )
         ],
       ),
-    );
-  }
-}
-
-class TileView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        TileList(task: 'Buy milk', check: true),
-        TileList(task: 'Buy bread', check: false),
-        TileList(task: 'Drink milk', check: true)
-      ],
-    );
-  }
-}
-
-class TileList extends StatelessWidget {
-  TileList({@required this.task, @required this.check});
-  final String task;
-  final bool check;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(' $task'),
-      trailing: Checkbox(value: check, onChanged: null),
     );
   }
 }
