@@ -9,12 +9,11 @@ class _TaskTileState extends State<TaskTile> {
   bool isChecked =
       false; //! Herşey burdaki boola bağlı, parent state den aşağı dağılıyor.
 
-  void checkboxCallback(bool checkboxState) {
-    //! 2- çağırılan fonksiyonun içeriği
-    setState(() {
-      isChecked = checkboxState;
-    });
-  }
+  // void checkboxCallback(bool checkboxState) {   // ! burdaki callback isimsiz hali aşağıda kullanılıyor kısa olarak
+  //   setState(() {
+  //     isChecked = checkboxState;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +24,15 @@ class _TaskTileState extends State<TaskTile> {
             decoration: isChecked ? TextDecoration.lineThrough : null),
       ),
       trailing: TaskCheckbox(
-        isChecked,
-        checkboxCallback, //! 2- builder ile çağırılan fonksiyon
+        checkboxState: isChecked,
+        toggleCheckboxState: (bool checkboxState) {
+          //! callback fonksiyonu kullanımı yukardakinin kısa hali
+          setState(
+            () {
+              isChecked = checkboxState;
+            },
+          );
+        },
       ),
     );
   }
@@ -36,7 +42,7 @@ class TaskCheckbox extends StatelessWidget {
   final bool checkboxState;
   final Function toggleCheckboxState;
 
-  TaskCheckbox(this.checkboxState, this.toggleCheckboxState);
+  TaskCheckbox({this.checkboxState, this.toggleCheckboxState});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +50,7 @@ class TaskCheckbox extends StatelessWidget {
       activeColor: Colors.lightBlueAccent,
       value: checkboxState,
       onChanged:
-          toggleCheckboxState, //! 1- stateless widget ekran değiştiremediği için, setstateli fonksiyon atanıyor
+          toggleCheckboxState, //! 1- stateless widget ekran değiştiremediği için, setstateli fonksiyon atanıyor (callback)
     );
   }
 }
