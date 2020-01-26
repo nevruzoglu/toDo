@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ShowModalScreen extends StatelessWidget {
+  final Function addTaskCallback;
+  ShowModalScreen(this.addTaskCallback);
+
+  String newTaskTitle;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,6 +29,9 @@ class ShowModalScreen extends StatelessWidget {
               TextField(
                 textAlign: TextAlign.center,
                 autofocus: true,
+                onChanged: (newText) {
+                  newTaskTitle = newText;
+                },
               ),
               SizedBox(
                 height: 10,
@@ -36,7 +43,10 @@ class ShowModalScreen extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  addTaskCallback(newTaskTitle);
+                  Navigator.pop(context);
+                },
                 color: Colors.lightBlueAccent,
               ),
             ],
