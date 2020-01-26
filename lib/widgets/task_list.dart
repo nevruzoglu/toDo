@@ -10,6 +10,7 @@ class TaskList extends StatefulWidget {
 class _TaskListState extends State<TaskList> {
   List<Task> tasks = [
     Task(name: 'buy milk'),
+    Task(name: 'buy milk'),
   ];
 
   @override
