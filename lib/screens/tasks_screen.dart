@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:todo/widgets/task_list.dart';
 import 'modal_screen.dart';
 import 'package:todo/modals/task_data.dart';
+import 'package:provider/provider.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
+class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +21,9 @@ class _TasksScreenState extends State<TasksScreen> {
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom),
                       child: ShowModalScreen((newTaskTitle) {
-                        setState(() {
-                          tasks.add(Task(name: newTaskTitle));
-                        });
+                        // setState(() {
+                        //   tasks.add(Task(name: newTaskTitle));
+                        // });
                       }))));
         },
       ),
@@ -61,7 +57,7 @@ class _TasksScreenState extends State<TasksScreen> {
                         fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    '${tasks.length}',
+                    '${Provider.of<TaskData>(context).tasks.length}',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   )
                 ],
@@ -76,7 +72,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(30),
                       topLeft: Radius.circular(30))),
-              child: TaskList(tasks),
+              child: TaskList(),
             ),
           )
         ],
