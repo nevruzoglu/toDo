@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo/widgets/task_list.dart';
 import 'modal_screen.dart';
-import 'package:todo/modals/task.dart';
+import 'package:todo/modals/task_data.dart';
 
 class TasksScreen extends StatefulWidget {
   @override
@@ -9,12 +9,6 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: 'buy milk'),
-    Task(name: 'buy eggs'),
-    Task(name: 'buy bread'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
