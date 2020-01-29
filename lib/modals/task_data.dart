@@ -15,4 +15,14 @@ class TaskData extends ChangeNotifier {
     tasks.add(task);
     notifyListeners(); // ! Provider notify olması için bu gerekli
   }
+
+  void updateTask(Task task) {
+    task.toggleDone();
+    notifyListeners();
+  }
+
+  void deleteTask(Task task) {
+    tasks.remove(task);
+    notifyListeners();
+  }
 }
