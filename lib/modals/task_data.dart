@@ -9,4 +9,10 @@ class TaskData extends ChangeNotifier {
   ];
 
   int get taskCount => tasks.length;
+
+  void addTask(String newTaskTitle) {
+    final task = Task(name: newTaskTitle);
+    tasks.add(task);
+    notifyListeners(); // ! Provider notify olması için bu gerekli
+  }
 }

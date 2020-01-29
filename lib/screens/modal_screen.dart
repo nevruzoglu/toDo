@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/modals/task_data.dart';
 
 class ShowModalScreen extends StatelessWidget {
-  final Function addTaskCallback;
-  ShowModalScreen(this.addTaskCallback);
-
   String newTaskTitle;
   @override
   Widget build(BuildContext context) {
@@ -11,9 +10,12 @@ class ShowModalScreen extends StatelessWidget {
       color: Color(0xff757575),
       child: Container(
         decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
         padding: EdgeInsets.all(20),
         child: Padding(
           padding: const EdgeInsets.all(40.0),
@@ -44,7 +46,8 @@ class ShowModalScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  addTaskCallback(newTaskTitle);
+                  Provider.of<TaskData>(context, listen: false)
+                      .addTask(newTaskTitle);
                   Navigator.pop(context);
                 },
                 color: Colors.lightBlueAccent,
