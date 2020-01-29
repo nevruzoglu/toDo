@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:todo/modals/task_data.dart';
 import 'package:todo/widgets/task_tile.dart';
 import 'package:provider/provider.dart';
